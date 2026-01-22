@@ -22,18 +22,16 @@ pipeline {
 
         stage("build image") {
             steps {
-              echo "Building Image"
-              withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                  sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
-                  sh 'docker build -t myapp:latest .'
-                  sh 'docker tag myapp:latest vuyalaarun/myapp:latest'
-                  sh 'docker push vuyalaarun/myapp:latest'
+                script {
+                    gv.buildImage()
             }
         }
         }
         stage("deploy") {
             steps {
-              echo "Deploying app Image"
+                script {
+                    gv.deployApp()
+                }
             }
         }               
     }

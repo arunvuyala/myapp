@@ -5,10 +5,11 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t nanatwn/demo-app:jma-2.0 .'
-        sh 'echo $PASS | docker login -u $USER --password-stdin'
-        sh 'docker push nanatwn/demo-app:jma-2.0'
+    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                  sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                  sh 'docker build -t myapp:latest .'
+                  sh 'docker tag myapp:latest vuyalaarun/myapp:latest'
+                  sh 'docker push vuyalaarun/myapp:latest'
     }
 }
 
