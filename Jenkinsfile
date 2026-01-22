@@ -1,5 +1,3 @@
-def gv
-
 pipeline {   
     agent any
     tools {
@@ -25,7 +23,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    gv.buildImage()
+                  //  gv.buildImage()
                 }
             }
         }
@@ -33,7 +31,7 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    gv.deployApp()
+                 //   gv.deployApp()
                 }
             }
         }               
