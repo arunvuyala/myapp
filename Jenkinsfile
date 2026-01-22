@@ -22,13 +22,13 @@ pipeline {
 
         stage("build image") {
             steps {
-              
+              echo "Building Image"
             }
         }
 
         stage("deploy") {
             steps {
-              
+              echo "Deploying app Image"
             }
         }               
     }
