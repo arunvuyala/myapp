@@ -30,7 +30,7 @@ pipeline {
                   sh 'docker push vuyalaarun/myapp:latest'
             }
         }
-
+        }
         stage("deploy") {
             steps {
               echo "Deploying app Image"
