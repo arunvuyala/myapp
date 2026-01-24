@@ -40,13 +40,13 @@ def deployApp() {
 
 def commitToGit() {
    echo 'commiting to GIT'
-    withCredentials([usernamePassword(credentialsId: '186a8e7d-2430-43cf-aad1-fffca7036dbc', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: '186a8e7d-2430-43cf-aad1-fffca7036dbc', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
        sh 'git config --global user.email "jenkins@example.com"'
        sh 'git config --global user.name "jenkins"'
        sh 'git status'
        sh 'git branch'
        sh 'git config --list'
-       sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/arunvuyala/myapp.git"
+       sh "git remote set-url origin https://${USER}:${PASS}@github.com/arunvuyala/myapp.git"
        sh 'git add pom.xml'
        sh 'git commit -m "commit from jenkins"'
        sh 'git push origin HEAD:master'
