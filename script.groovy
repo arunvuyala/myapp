@@ -39,18 +39,38 @@ def deployApp() {
 }
 
 def commitToGit() {
-   echo 'commiting to GIT'
-    withCredentials([usernamePassword(credentialsId: '186a8e7d-2430-43cf-aad1-fffca7036dbc', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-       sh 'git config --global user.email "jenkins@example.com"'
-       sh 'git config --global user.name "jenkins"'
-       sh 'git status'
-       sh 'git branch'
-       sh 'git config --list'
-       sh "git remote set-url origin https://${USER}:${PASS}@github.com/arunvuyala/myapp.git"
-       sh 'git add pom.xml'
-       sh 'git commit -m "commit from jenkins"'
-       sh 'git push origin HEAD:master'
+    echo 'Committing version change to GIT...'
+
+    withCredentials([usernamePassword(
+        credentialsId: '186a8e7d-2430-43cf-aad1-fffca7036dbc', 
+        usernameVariable: 'USER', 
+        passwordVariable: 'PASS')]) {
+
+        // Configure Git locally (per repo, not global)
+        sh '''
+            git config user.email "jenkins@example.com"
+            git config user.name "jenkins"
+        '''
+
+        // Debug info (optional)
+        sh 'git status'
+        sh 'git branch'
+        sh 'git config --list'
+
+        // Set remote URL using username + PAT
+        sh "git remote set-url origin https://${USER}:${PASS}@github.com/arunvuyala/myapp.git"
+
+        // Add and commit changes
+        sh 'git add pom.xml'
+        sh 'git commit -m "Incremented version to ${IMAGE_VERSION}" || echo "No changes to commit"'
+
+        // Push to branch (replace master with main if needed)
+        sh "git push origin HEAD:master"
     }
+
+    echo "Git commit & push completed!"
+}
+
     
 }
 
