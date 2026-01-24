@@ -1,6 +1,5 @@
 def incrementVersion() {
     echo 'Incrementing version...'
-
     // Increment version using Maven
     sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit -q -DgenerateBackupPoms=false"
 
