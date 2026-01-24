@@ -71,7 +71,4 @@ def commitToGit() {
     echo "Git commit & push completed!"
 }
 
-    
-}
-
 return this
