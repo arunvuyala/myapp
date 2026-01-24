@@ -28,7 +28,7 @@ def buildImage() {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                   sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
-                  sh 'docker build -t myapp:${env.IMAGE_VERSION} .'
+                  sh "docker build -t myapp:${env.IMAGE_VERSION} ."
                   sh 'docker tag myapp:2.0 vuyalaarun/myapp:${env.IMAGE_VERSION}'
                   sh 'docker push vuyalaarun/myapp:${env.IMAGE_VERSION}'
     }
