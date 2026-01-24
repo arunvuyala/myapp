@@ -49,7 +49,7 @@ def commitToGit() {
        sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/arunvuyala/myapp.git"
        sh 'git add pom.xml'
        sh 'git commit -m "commit from jenkins"'
-       sh 'git push origin master'
+       sh 'git push origin HEAD:master'
     }
     
 }
