@@ -65,7 +65,7 @@ def commitToGit() {
         sh 'git commit -m "Incremented version to ${IMAGE_VERSION}" || echo "No changes to commit"'
 
         // Push to branch (replace master with main if needed)
-        sh "git push origin HEAD:master"
+        sh "git push https://${USER}:${PASS}@github.com/arunvuyala/myapp.git HEAD:master"
     }
 
     echo "Git commit & push completed!"
