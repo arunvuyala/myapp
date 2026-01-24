@@ -1,17 +1,23 @@
 def incrementVersion() {
     echo 'Incrementing version...'
-    // Increment version using Maven
-    sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit -q -DgenerateBackupPoms=false"
 
-    // Read pom.xml and extract <version>
+    // Use bash to run Maven
+    sh '''
+        #!/bin/bash
+        mvn build-helper:parse-version versions:set \
+            -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion} \
+            versions:commit -q -DgenerateBackupPoms=false
+    '''
+
+    // Read version from pom.xml
     def pomContent = readFile('pom.xml')
     def matcher = pomContent =~ /<version>(.+)<\/version>/
     def newVersion = matcher[0][1]
 
-    // Set as environment variable
     env.IMAGE_VERSION = newVersion
     echo "IMAGE_VERSION=${env.IMAGE_VERSION}"
 }
+
 
 def buildJar() {
     echo 'building the application...'
