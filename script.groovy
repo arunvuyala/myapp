@@ -38,4 +38,20 @@ def deployApp() {
     echo 'deploying the application...'
 }
 
+def commitToGit() {
+   echo 'commiting to GIT'
+    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+       sh 'git config --global user.email "jenkins@example.com"'
+       sh 'git config --global user.name "jenkins"'
+       sh 'git status'
+       sh 'git branch'
+       sh 'git config --list'
+       sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/arunvuyala/myapp.git"
+       sh 'git add pom.xml'
+       sh 'git commit -m "commit from jenkins"'
+       sh 'git push origin master'
+    }
+    
+}
+
 return this
