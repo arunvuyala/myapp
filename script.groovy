@@ -58,7 +58,7 @@ def commitToGit() {
         sh 'git config --list'
 
         // Set remote URL using username + PAT
-        sh "git remote set-url origin https://${USER}:${PASS}@github.com/arunvuyala/myapp.git"
+       // sh "git remote set-url origin https://${USER}:${PASS}@github.com/arunvuyala/myapp.git"
 
         // Add and commit changes
         sh 'git add pom.xml'
