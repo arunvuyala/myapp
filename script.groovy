@@ -40,7 +40,7 @@ def deployApp() {
 
 def commitToGit() {
    echo 'commiting to GIT'
-    withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: '186a8e7d-2430-43cf-aad1-fffca7036dbc', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
        sh 'git config --global user.email "jenkins@example.com"'
        sh 'git config --global user.name "jenkins"'
        sh 'git status'
